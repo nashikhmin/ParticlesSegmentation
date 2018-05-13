@@ -1,0 +1,25 @@
+This directory contains the functionalty to generate artificial binary images
+with annotations to train and evaluate segmentation methods.
+
+gen_img.m
+- A function to generate an arbitrary binary image of overlapping objects
+  with known shape and the corresponding ground truth, i.e. the correct
+  segmentation result and the parameters of each objects/segments.
+
+gen_ellipse.m
+- An example of a function that is called by gen_img() to draw a single 
+  object. The function generates a binary image with an arbitrary ellipse in 
+  arbitrary position.
+
+gt_segment.m
+- A function to get the ground truth segmentation result for k:th object as
+  a binary image based on the ground truth cell array produced by gen_img().
+
+configure01.m
+- An example script to generate configure struct for gen_img().
+
+example01.m
+- An example script to generate one image and to plot the ground truth.
+
+example02.m
+- An example script to generate a set images with ground truth.
