@@ -3,7 +3,7 @@ warning off
 config
 % load the particles image
 
-imgName = 'realimage01';
+imgName = 'img001';
 imgExt = '.png';
 imggry = imread(strcat(imgName,imgExt));
 imggry = uint8(imggry);
@@ -12,7 +12,7 @@ imggry = uint8(imggry);
 param = readparam();
 
 %it can be 'synthetic', 'real', 'no'
-validation = 'no';
+validation = 'synthetic';
 resultPath = '../../Results/';
 
 fprintf('Segmentation of Overlapping Nanoparticles Using Branch and Bound Algorithem with Modificated Cost Function.....\n')

@@ -1,4 +1,4 @@
-function  mia_particles_segmentation(I,param,gt,result_path,validation)
+function  mia_particles_segmentation(I,param,im_name,result_path,validation)
 % mia_particles_segmentation performs segmentation using the branch and bound method.
 %   Synopsis
 %      stats = mia_particles_segmentation(I,param)
@@ -39,7 +39,7 @@ function  mia_particles_segmentation(I,param,gt,result_path,validation)
     imgbw =  ~im2bw(I,level);
     % Contour Evidence Extraction
     fprintf('Performs Contour Evidence Extraction\n')
-    mia_cmpcontourevidence_bb(imgbw,k,rmin,rmax,alpha,beta,gamma,vis1,gt,result_path,validation);
+    mia_cmpcontourevidence_bb(imgbw,k,rmin,rmax,alpha,beta,gamma,vis1,im_name,result_path,validation);
     % Contour Estimation
     %fprintf('Performs Contour Estimation\n')
     %stats =  mia_estimatecontour_lsf(I,contourevidence,vis2);
