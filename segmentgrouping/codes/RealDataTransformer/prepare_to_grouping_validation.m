@@ -8,7 +8,7 @@
 % id and third row is the seedpoints
 
 clc; clear; close all;
-imNum = '01';
+imNum = '11';
 load(strcat('sample',imNum));
 imageName = strcat('../../Dataset/realimage',imNum);
 col_seg = lines(500); 
@@ -34,7 +34,7 @@ n_fig = 1;
 gtparam1 = [];
 for i=1:length(gtparam)
     [y,x] = ind2sub(size(imgbw),gtparam(i).boundary);
-    gtparam1{i}=[y';x']';
+    gtparam1{i}=[x';y']';
     %plot(x,y,'o','color',col_seg(i,:,:),'markerfacecolor',col_seg(i,:,:));hold on
 end
 
@@ -43,4 +43,4 @@ gtparam = gtparam1;
 
 imFile = strcat(imageName,'.png');
 imwrite(imgbw,imFile);
-save(imageName,'gtparam','segmentscc');
+save(imageName,'gtparam','segmentscc','xc','yc');

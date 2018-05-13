@@ -40,9 +40,12 @@ result_grouping_ground = [];
 
 % iterate over each connected component
 if (strcmp(validation,'real'))
-    %TODO: LOAD SEGMENTS
+    groundData = load(im_name);
+    segments = groundData.segmentscc;
+    nmcc = length(segments);
+    xc = groundData.xc;
+    yc = groundData.yc;
 end
-
 for  n = 1:nmcc
     if (~strcmp(validation,'real'))
         fprintf('Processing coneccted component%2d :\n',n)
@@ -51,6 +54,9 @@ for  n = 1:nmcc
         % concave point extraction
         fprintf('Extracting the concave points\n')
         [idxcp{n},xc{n},yc{n},bnd{n}]= mia_cmpconcavepoint_css(lb,bnd{n},C,T_angle,sig,H,L,Endpoint,Gap_size,k,vis);
+        if (isempty(bnd{n}))
+            continue
+        end
         % segment the boundaries by the detetcted concave points
         fprintf('Segmenting the curve by detected concave points\n')
         segments{n} = mia_segmentcurve(bnd{n}',idxcp{n});
@@ -86,16 +92,18 @@ for  n = 1:nmcc
     
     
     
-    if (~strcmp(validation,'no'))
-        result_file_name_gt= strcat(result_path,im_name,'-gt');
-        dlmwrite(result_file_name_gt,result_grouping_ground);
-    end
-    result_file_name_pred= strcat(result_path,im_name,'-pred');
-    dlmwrite(result_file_name_pred,result_grouping_predicted);
-    
     
     fprintf('..............................................\n')
 end
+
+
+if (~strcmp(validation,'no'))
+    result_file_name_gt= strcat(result_path,im_name,'-gt');
+    dlmwrite(result_file_name_gt,result_grouping_ground);
+end
+result_file_name_pred= strcat(result_path,im_name,'-pred');
+dlmwrite(result_file_name_pred,result_grouping_predicted);
+
 if vis == 1
     figure(1),imshow(L); hold on
     title('Concave points, countor segments and detected seedpoints')

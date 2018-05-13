@@ -11,6 +11,11 @@ function [curve,curve_start,curve_end,curve_mode,cur_num]=mia_extract_curve(BW,G
 %   contour is nearly connected to another endpoint, fill the gap and continue
 %   the extraction. The default gap size is 1 pixles.
 
+curve=[];
+curve_start=[];
+curve_end=[];
+curve_mode=[];
+
 [L,W]=size(BW);
 BW1=zeros(L+2*Gap_size,W+2*Gap_size);
 BW_edge=zeros(L,W);

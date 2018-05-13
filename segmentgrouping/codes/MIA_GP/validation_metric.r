@@ -1,5 +1,5 @@
 evaluating_criteria <- function(img_name) {
-  filename <- paste("/home/nashikhmin/git/masterThesis/comphi1/segmentgrouping/codes/MIA_BB/result/",img_name,sep="")
+  filename <- paste("/home/nashikhmin/git/masterThesis/git/segmentgrouping/Results/",img_name,sep="")
   filename_gt = paste(filename, "gt", sep="-")
   filename_pred = paste(filename, "pred", sep="-")
   gt <-  as.integer(scan(filename_gt, what="", sep=","))

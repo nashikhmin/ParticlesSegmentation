@@ -20,12 +20,15 @@ for i=1:length(groundData)
     if (isnan(cy))
       cy = mean(points(:,2));
     end
-    poly = scale(poly,1.1,[cx cy]);
+    poly = scale(poly,1.15,[cx cy]);
     polys{i} =poly;
     poly_seg_groups{i}=[];
 
 end
-     
+
+
+used=zeros([1 length(segments)]);
+
 
 for i=1:size(segments,2)
    seg = segments{1,i};
@@ -45,10 +48,16 @@ for i=1:size(segments,2)
    end
    if (p_count>0)
       poly_seg_groups{p_ind} = [poly_seg_groups{p_ind} i]; 
+      used(i)=1;
    end
        
 end
 
- poly_seg_groups = poly_seg_groups(~cellfun('isempty',poly_seg_groups));  
+poly_seg_groups = poly_seg_groups(~cellfun('isempty',poly_seg_groups));  
+
+for i=1:size(segments,2)
+    if (~used(i))
+        poly_seg_groups = [poly_seg_groups {i}];
+    end
 
 end

@@ -5,7 +5,7 @@ function mia_viscp(segin,xc,yc)
         scatter(segin{l}{1,i}(:,2),segin{l}{1,i}(:,1),[],'MarkerEdgeColor',col_seg(i,:,:),'MarkerFaceColor',col_seg(i,:,:)); hold on
         scatter(segin{l}{3,i}(:,2),segin{l}{3,i}(:,1),[],'s','MarkerEdgeColor',col_seg(i,:,:),'MarkerFaceColor',col_seg(i,:,:)); hold on
      end
-      plot(yc{l},xc{l},'ob','markerfacecolor','g'); hold on
+     plot(yc{l},xc{l},'ob','markerfacecolor','g'); hold on
   end
 end
 

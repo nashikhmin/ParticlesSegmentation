@@ -6,7 +6,7 @@ clear all; close all;
 imgdir = '../../Dataset/';
 
 % number of images
-nimages = 3;
+nimages = 12;
 
 % run configure script
 configure;
