@@ -1,4 +1,4 @@
-function J = na_cmpgroupingcost(segin, intersec)
+function J = na_cmpgroupingcost(segin,seeds,cp,alpha,beta,gamma,I, intersec)
 % mia_cmpgroupingcost compute the grouping cost J.
 
 %   Synopsis
@@ -31,12 +31,6 @@ function J = na_cmpgroupingcost(segin, intersec)
 %----------------------------------------------------------------------------------------
 %Jcon = mia_concavity(segin,I); % concavity cost
 %xyst = [];
-
-
-if (length(segin)==1)
-    J = 1;
-    return
-end
 
 segments=[];
 for i=1:length(segin)
@@ -72,25 +66,34 @@ if (ss>0)
     return
 end
 
-k = convhull(x,y);
-B = polyarea(x(k),y(k));
-
-len = sqrt((p(1,1)-p(end,1))^2+(p(1,2)-p(end,2))^2);
-
-if ((abs(A-B)/A>0.059 && len*2<B))
-    J=inf;
-    return
+    k = convhull(x,y);
+    B = polyarea(x(k),y(k));
+    
+    len = sqrt((p(1,1)-p(end,1))^2+(p(1,2)-p(end,2))^2);
+    
+    if ((abs(A-B)/A>0.059 && len*2<B) || na_checkNear(p_full))
+        J=inf;
+        return
+    end
+else
+    J=1/length(seeds);
+    return;
 end
 
 [~,~,area_rec] = minboundparallelogram(p(:,1),p(:,2));
-
 [trix,triy] = minboundtri(p(:,1),p(:,2));
-area_tri = polyarea(trix,triy);
 
+area_tri = polyarea(trix,triy);
+[trix,triy] = minboundtri(p(:,1),p(:,2));
 [AA,c] = minboundellipse(p(:,1:2)',.01);
 xx = Ellipse_plot(AA,c);
 area_ellipse = polyarea(xx(1,:),xx(2,:));
+%area_cost = sq_sum/A;
+if (length(seeds)==1)
+    J = 1;
+    return
+end
+J = (J+min([area_tri,area_rec,area_ellipse])/A)/(length(seeds));
 
-J = (J+min([area_tri,area_rec,area_ellipse])/A)/(length(segments));
 end
 

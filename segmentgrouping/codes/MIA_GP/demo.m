@@ -3,7 +3,7 @@ warning off
 config
 % load the particles image
 
-imgName = 'demo3';
+imgName = 'realimage01';
 imgExt = '.png';
 imggry = imread(strcat(imgName,imgExt));
 imggry = uint8(imggry);
