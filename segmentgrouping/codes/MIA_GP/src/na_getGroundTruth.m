@@ -9,7 +9,7 @@ polys = [];
 poly_seg_groups=[];
 for i=1:length(groundData)
    points = groundData{1,i};
-   if (isempty(points))
+   if (size(points,1)<3)
        continue;
    end
    poly = polyshape(points(:,1),points(:,2),'Simplify',true);
