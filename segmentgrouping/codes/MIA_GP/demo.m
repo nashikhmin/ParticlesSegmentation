@@ -3,8 +3,8 @@ warning off
 config
 
 
-for i=12:12
-    imgName = strcat('img', num2str(i,'%03d'));
+for i=1:1
+    imgName = strcat('demo4');
     imgExt = '.png';
     imggry = imread(strcat(imgName,imgExt));
     imggry = uint8(imggry);
@@ -13,7 +13,7 @@ for i=12:12
     param = readparam();
     
     %it can be 'synthetic', 'real', 'no'
-    validation = 'synthetic';
+    validation = 'no';
     resultPath = '../../Results/';
     
     fprintf('Segmentation of Overlapping Nanoparticles Using Branch and Bound Algorithem with Modificated Cost Function.....\n')

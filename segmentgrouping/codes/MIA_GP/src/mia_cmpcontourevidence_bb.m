@@ -66,7 +66,7 @@ for  n = 1:nmcc
         segments{n} = mia_cmbseg(segments{n});
         % segmnet grouping by branch and bound
         if (isempty(segments{n}))
-            continue
+           	segments{n}={bnd{n}{1,1};[1];[1,1]};
         end
     end
     fprintf('Performing segment grouping by BB\n');
@@ -105,21 +105,30 @@ result_file_name_pred= strcat(result_path,im_name,'-pred');
 dlmwrite(result_file_name_pred,result_grouping_predicted);
 
 if vis == 1
-    figure(1),imshow(L); hold on
+    h = figure(1),imshow(L); hold on
     title('Concave points, countor segments and detected seedpoints')
     mia_viscp(segments,xc,yc)
-    pause (0.5)
+    pause (1)
+    result_file= strcat(result_path,im_name,'-segments');
+    saveas(h,result_file,'png')
     
     if (~strcmp(validation,'no'))
-        figure(2),imshow(L); hold on
+        h = figure(2),imshow(L); hold on
         title('Contour Evidences Ground truth')
         mia_visevidecnes(contourevidence_gt)
-        pause (0.5)
+        pause (1)
+        result_file= strcat(result_path,im_name,'-gt');
+        saveas(h,result_file,'png')
     end
     
-    figure(3),imshow(L); hold on
-    title('Contour Evidences BB')
+    h = figure(3),imshow(L); hold on
+    title('Contour Evidences GP')
     mia_visevidecnes(contourevidence)
-    pause (0.5)
+    
+   result_file= strcat(result_path,im_name,'-gp');
+   saveas(h,result_file,'png')
+    
+    dlmwrite(result_file_name_pred,result_grouping_predicted);
+    pause (1)
     
 end
