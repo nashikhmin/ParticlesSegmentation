@@ -70,21 +70,8 @@ if (curve_num==0)
     bnd=[];
     return
 end
-%[cp, idx] = mia_get_corner2(curve); % Detect corners
 [~,~,idx]=mia_get_corner(curve,curve_start,curve_end,curve_mode,curve_num,BW,5,Endpoint,C,T_angle); % Detect corners
 [xc,yc,idxc] = mia_removeconvexcorner(idx,curve,I2,k);
-%[xc,yc,idxc] = na_removeextrapoints(idx,curve,BW,k);
-
-%     %REMOVE OLD CODE
-%     [~,~,idx]=mia_get_corner(curve,curve_start,curve_end,curve_mode,curve_num,BW,5,Endpoint,C,T_angle); % Detect corners
-%     % remove the detected convex corners
-%     [xc,yc,idxc] = mia_removeconvexcorner(idx,curve,I2,k);
-
-
-%[idxconcavepoints,xcp,ycp, bnd] = mia_concvptobnd(curve,xc,yc,idxc);
-%    x1 = bnd{1,1};
-%   y1 = curve{1,1};
-%  z=0;
 idxconcavepoints = idxc;
 bnd = curve';
 xcp = xc;

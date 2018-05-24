@@ -66,13 +66,13 @@ for  n = 1:nmcc
         segments{n} = mia_cmbseg(segments{n});
         % segmnet grouping by branch and bound
         if (isempty(segments{n}))
-           	segments{n}={bnd{n}{1,1};[1];[1,1]};
+            segments{n}={bnd{n}{1,1};[1];[1,1]};
         end
     end
     fprintf('Performing segment grouping by BB\n');
     
     if (strcmp(validation,'synthetic') || strcmp(validation,'real'))
-        Shat = na_getGroundTruth(im_name,segments{n})';
+        Shat = mia_getGroundTruth(im_name,segments{n})';
         result_grouping_ground= [result_grouping_ground validation_convert_to_segments_labels(Shat,n)];
         for jj= 1:length(Shat)
             counter_gt =counter_gt+1;
@@ -80,7 +80,7 @@ for  n = 1:nmcc
         end
     end
     
-    Shat= mia_groupsegments_bb(segments{n},xc{n},yc{n},alpha,beta,gamma,I);
+    Shat= mia_groupsegments_bb(segments{n},xc{n},yc{n});
     result_grouping_predicted = [result_grouping_predicted validation_convert_to_segments_labels(Shat,n)];
     
     % groupe the contour segments
@@ -89,10 +89,6 @@ for  n = 1:nmcc
         contourevidence{counter} = mia_groupsegments(segments{n}(1,Shat{jj}));
         contourevidence{counter}(:,3)=jj+n*1000;
     end
-    
-    
-    
-    
     fprintf('..............................................\n')
 end
 
@@ -125,10 +121,9 @@ if vis == 1
     title('Contour Evidences GP')
     mia_visevidecnes(contourevidence)
     
-   result_file= strcat(result_path,im_name,'-gp');
-   saveas(h,result_file,'png')
+    result_file= strcat(result_path,im_name,'-gp');
+    saveas(h,result_file,'png')
     
     dlmwrite(result_file_name_pred,result_grouping_predicted);
     pause (1)
-    
 end

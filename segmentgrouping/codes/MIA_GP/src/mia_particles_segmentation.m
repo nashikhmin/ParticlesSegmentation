@@ -40,7 +40,4 @@ function  mia_particles_segmentation(I,param,im_name,result_path,validation)
     % Contour Evidence Extraction
     fprintf('Performs Contour Evidence Extraction\n')
     mia_cmpcontourevidence_bb(imgbw,k,rmin,rmax,alpha,beta,gamma,vis1,im_name,result_path,validation);
-    % Contour Estimation
-    %fprintf('Performs Contour Estimation\n')
-    %stats =  mia_estimatecontour_lsf(I,contourevidence,vis2);
 end

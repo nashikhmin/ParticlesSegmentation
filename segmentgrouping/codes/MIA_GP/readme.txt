@@ -3,24 +3,21 @@ Microscopy Image Analysis (MIA) toolbox for segmentation of overlapping convex o
 The toolbox contains the following folders:
 src:
 
-	%   mia_cmbseg 		         - Combines the segments belong to boundaries of holes inside the objects with the segments of objects boundaries.
-	%   mia_cmpadd                   - Computes the discrepancy between the fitted curve and the contour points. 
+	%   getsemnets 		         - Reduce point in the segments
+	%   mia_checkNear 		     - check segments are near or not
+	%   mia_getpointsCW 		     - sort segments in CW order
 	%   mia_cmpconcavepoint_css 	 - Performs concave point extraction.
 	%   mia_contourevidence 	 - Performs contour evidenc extraction step of the method.
-	%   mia_cmpdistance  		 - Computes the distance betwwen fitted ellipses.
-        %   mia_cmpgroupingcost 	 - Computes the cost function.
-        %   mia_cmpseedpoints 	         - Computes the seedpoints for each edge segments by normal symmetry transform.
-        %   mia_concavity 	         - Computes the concavity cost.
-        %   mia_concvptobnd	         - Assigns each detected concave point on the curve to the boundaries.
-        %   mia_ellipticity 		 - Computes the ellipticity cost.              
-        %   mia_gencandidatesol          - Generates the candidate solutions.
-        %   mia_groupsegments            - Groups the contour segments.
+	%   mia_cmpgroupingcost 	 - Computes the cost function.
+	%   mia_cmpseedpoints 	         - Computes the seedpoints for each edge segments by normal symmetry transform.
+	%   mia_concvptobnd	         - Assigns each detected concave point on the curve to the boundaries.
+	%   mia_ellipticity 		 - Computes the ellipticity cost.              
+	%   mia_gencandidatesol          - Generates the candidate solutions.
+	%   mia_groupsegments            - Groups the contour segments.
 	%   mia_groupsegments_bb 	 - Performs segment grouping sub-step of the method based on the branch and bound algorithem.
-        %   mia_iscp                     - Checks if there is cp points between the contour segments.
 	%   mia_nst                      - Performs normal symmetry transform to edge segments
 	%   mia_removeconvexcorner       - Removes the convex corner.
 	%   mia_segmentcurve             - Splits the curve into contour segments.
-	%   mia_estimatecontour		 - Esitmates the objects boundaries by ellipse fitting.
 
 	% Demos
 	%   readparam                   - Reads the method parameters.
@@ -54,6 +51,8 @@ img:
 % Author(s):
 
 %    Sahar Zafari <sahar.zafari@lut.fi>
+%    Nikita Ashikhmin <veoring@gmail.com>
+
 
 %  Please, if you find any bugs contact the authors.
 

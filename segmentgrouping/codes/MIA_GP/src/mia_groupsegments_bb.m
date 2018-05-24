@@ -1,4 +1,4 @@
-function Shat= mia_groupsegments_bb(segin,xcp,ycp,alpha,beta,gamma,I)
+function Shat= mia_groupsegments_bb(segin,xcp,ycp)
 % mia_groupsegments performs segment grouping sub-step of the method
 % based on the branch and bound algorithem.
 
@@ -26,10 +26,6 @@ function Shat= mia_groupsegments_bb(segin,xcp,ycp,alpha,beta,gamma,I)
 %   Changes
 %       14/01/2016  First Edition
 %
-%     A=segin';
-%     [~,I2] = sort(cellfun(@length,A(:,1)));
-%     I2 = flip(I2);
-%     segin = A(I2,:)';
 Shat =  []; % optimal solution
 Cp =  [ycp;xcp]; % concave points
 S = [segin{2,:}]; % index of each segments
@@ -40,11 +36,11 @@ for i=1:n
     B{i}(:,3) = i;
 end
 
-nears = na_getNears(B);
+nears = mia_getNears(B);
 for i=1:size(B,2)
     B{i} = getsegments(B{i});
 end
-intersection = na_getInnerSegmentsList(B);
+intersection = mia_getInnerSegmentsList(B);
 intersection = intersection+nears;
 while ~isempty(S)
     nmS = length(S); % number of contour segmentscc for component ii
@@ -56,12 +52,8 @@ while ~isempty(S)
         S1 = Sjj;
         sc = P{end,1};
         dpc = P{end,2};
-        fsc = na_cmpgroupingcost(B(sc),intersection);
+        fsc = mia_cmpgroupingcost(B(sc),intersection);
         if fsc<=fmin
-            if (fsc==0)
-                show_seg(B(sc));
-                close;
-            end
             fmin = fsc;
             shatjj = sc;
             P(end,:) = [];
@@ -78,14 +70,10 @@ while ~isempty(S)
             iter = iter+1;
             sc = P{end,1};
             dpc = P{end,2};
-            fsc = na_cmpgroupingcost(B(sc),intersection);
+            fsc = mia_cmpgroupingcost(B(sc),intersection);
             
             
             if fsc<fmin
-                if (fsc==0)
-                    show_seg(B(sc));
-                    close;
-                end
                 fhatjj = fsc;
                 fmin = fsc;
                 shatjj = sc;

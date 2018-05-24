@@ -28,10 +28,7 @@ function segin = mia_cmpseedpoints(segin,I,radii)
         nmcc = size(segin{jj},2);
         for ii=1:nmcc
             segment = segin{jj}{1,ii};
-            %normvec = mia_linenormals2D(segment); % compute the normal vector
-            %[xseed,yseed] = mia_nst(I,segment,normvec,radii); % apply the nst transform
             segin{jj}{2,ii} = ii;
-            %segin{jj}{3,ii} = [xseed,yseed];
             segin{jj}{3,ii} = [1,1];
         end
     end
